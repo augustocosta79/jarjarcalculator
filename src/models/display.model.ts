@@ -1,0 +1,1 @@
+export enum DisplayType { input = 'input', result = 'result'}
