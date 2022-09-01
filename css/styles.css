@@ -37,6 +37,16 @@ button:hover {
     font-size: 36pt;
 }
 
+#display > #helper {
+    display: block;
+    width: 96%;
+    margin: auto;
+    text-align: right;
+    font-size: 12pt;
+    color: grey;
+    /* background-color: blueviolet; */
+}
+
 .container {
     padding: 15px;
     border: 1px solid rgb(194, 194, 194);
