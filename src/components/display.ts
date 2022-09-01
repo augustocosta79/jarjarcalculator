@@ -7,6 +7,7 @@ class Display {
     memory: Operation[] = []
     clearButton: HTMLButtonElement
     delButton: HTMLButtonElement
+    helper: HTMLSpanElement
     
     constructor(){
         this.type = DisplayType.input
@@ -14,6 +15,7 @@ class Display {
         this.input.title = this.type
         this.clearButton = document.getElementById('clear')! as HTMLButtonElement
         this.delButton = document.getElementById('del')! as HTMLButtonElement
+        this.helper = document.getElementById('helper')! as HTMLSpanElement
 
         this.configure()
     }
@@ -21,6 +23,36 @@ class Display {
     configure() {
         this.clearButton.addEventListener('click', this.clearMemory.bind(this))
         this.delButton.addEventListener('click', this.delNumber.bind(this))
+    }
+
+    showHelper(item: Operation): void {
+        let operatorSymbol
+        switch (item.operator) {
+            case 'sum':
+                operatorSymbol = '+'
+                break;
+            case 'sub':
+                operatorSymbol = '-'
+                break;
+            case 'mul':
+                operatorSymbol = 'x'
+                break;
+            case 'div':
+                operatorSymbol = '/'
+                break;
+            case 'result':
+                operatorSymbol = ''
+                break;
+            
+            default:
+                break;
+        }
+
+        this.helper.innerHTML = item.value + ' ' + operatorSymbol
+    }
+
+    hideHelper(): void {
+        this.helper.innerHTML = ''
     }
 
     setType(displayType: DisplayType): void {
@@ -45,6 +77,7 @@ class Display {
 
     clearMemory(): void {
         this.clear()
+        this.hideHelper()
         this.memory = []
     }
     

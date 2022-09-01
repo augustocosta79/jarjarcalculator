@@ -43,6 +43,7 @@ export class OperationButton extends ConfigureButton {
             
         }
 
+        display.showHelper(display.memory[0])
         display.clear()
         display.setType(DisplayType.result)
         display.enterResult(result)
