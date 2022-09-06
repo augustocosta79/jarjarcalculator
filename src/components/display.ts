@@ -1,10 +1,11 @@
 import { Operation } from '../models/operation.model.js'
 import { DisplayType } from '../models/display.model.js'
+import { calculator } from './calculator.js'
+
 
 class Display {
     input: HTMLInputElement
     type: DisplayType
-    memory: Operation[] = []
     clearButton: HTMLButtonElement
     delButton: HTMLButtonElement
     helper: HTMLSpanElement
@@ -25,7 +26,7 @@ class Display {
         this.delButton.addEventListener('click', this.delNumber.bind(this))
     }
 
-    showHelper(item: Operation): void {
+    showHelper(item: Operation, result: boolean): void {
         let operatorSymbol
         switch (item.operator) {
             case 'sum':
@@ -48,7 +49,11 @@ class Display {
                 break;
         }
 
-        this.helper.innerHTML = item.value + ' ' + operatorSymbol
+        if(result){
+            this.helper.innerHTML = item.previousValue + ' ' + operatorSymbol + ' ' + item.currentValue + ' ='
+        } else {
+            this.helper.innerHTML = item.previousValue + ' ' + operatorSymbol
+        }
     }
 
     hideHelper(): void {
@@ -78,7 +83,11 @@ class Display {
     clearMemory(): void {
         this.clear()
         this.hideHelper()
-        this.memory = []
+        calculator.memory = {
+            currentValue: 0,
+            previousValue: 0,
+            operator: ''
+        }
     }
     
     enterResult(result: string): void {
@@ -90,11 +99,13 @@ class Display {
     }
 
     delNumber(): void {
-        this.input.value = this.input.value.slice(0,-1)
+        if(display.type === DisplayType.input) {
+            this.input.value = this.input.value.slice(0,-1)
+        }
     }
 
     addOperation (operation: Operation){
-        this.memory.push(operation)
+        calculator.memory = operation
     }
 }
 

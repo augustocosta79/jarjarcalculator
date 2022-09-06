@@ -1,6 +1,7 @@
 export class Operation { 
     constructor(
-        public value: number,
+        public currentValue: number,
+        public previousValue: number,
         public operator: string
     ) {}
 }
