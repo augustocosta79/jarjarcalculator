@@ -4,4 +4,4 @@
 
  ### About Me
 
- Visit my profile at [LinkedIn]{https://www.linkedin.com/in/augusto-costa-neto/}
+ Visit my profile at [LinkedIn](https://www.linkedin.com/in/augusto-costa-neto/)
